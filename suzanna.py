@@ -74,27 +74,27 @@ def getClasses(subObj):
 
 def getPrereq(subObj):
     prereq_list_big = []
-    clickOn = subObj.find_all("span", {'class':'text detail-requisites margin--default'})
-    for course in clickOn:
-        final_prereqs = []
+    total_courses = (subObj.find_all("div", {'class': 'courseblock'}))
+    for course in total_courses:
         prereq_list = []
-        url2 = course.find_all('a', {'class': 'bubblelink code'})
-        for url in url2:
-            url = url.get("href")
-            if(str(url) != ""):
-                source = "https://catalog.unc.edu" + str(url)
-                #print("src: " + source)
-                dataClicky = requests.get(source)
-            #prereq page accessed
-                htmlClicky = dataClicky.text
-                clickySoup = BeautifulSoup(htmlClicky, 'html.parser')
-                prereq = "".join(getClasses(clickySoup))
-            else: 
-                prereq = "None"
+        if ("text detail-requisites margin--default" in str(course)):
+            url2 = course.find_all('a', {'class': 'bubblelink code'})
+            for url in url2:
+                url = url.get("href")
+                if(str(url) != ""):
+                    source = "https://catalog.unc.edu" + str(url)
+                    #print("src: " + source)
+                    dataClicky = requests.get(source)
+                #prereq page accessed
+                    htmlClicky = dataClicky.text
+                    clickySoup = BeautifulSoup(htmlClicky, 'html.parser')
+                    prereq = "".join(getClasses(clickySoup))
+                    prereq_list.append(prereq)
+        else: 
+            prereq = ""
             prereq_list.append(prereq)
+        
         prereq_list_big.append(prereq_list)
-
-    print(prereq_list_big)
         #     if (len(prereq_list) == 0):
         #         print("none")
         #         prereq_list_big.append("N/A")
