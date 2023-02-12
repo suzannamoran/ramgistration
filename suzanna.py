@@ -16,7 +16,7 @@ def main():
     megaprereq = []
     classes = []
     links = soup.select('a[href^="/courses/"]')
-    links = links[3:5] #153
+    links = links[3:153] #153
 
     for link in links:
         #accesses class catalogs for each program
