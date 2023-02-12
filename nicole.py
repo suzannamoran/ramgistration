@@ -1,9 +1,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #heyyyyyyyyyyyyyy
 =======
 =======
 package nicole
+=======
+>>>>>>> 00ec9ee (partially working)
 
 >>>>>>> 226ec12 (confirmed can import)
 from bs4 import BeautifulSoup
