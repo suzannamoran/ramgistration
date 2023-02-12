@@ -7,6 +7,7 @@ url = 'https://catalog.unc.edu/courses/'
 data = requests.get(url)
 html = data.text
 soup = BeautifulSoup(html, 'html.parser')
+dictionary_for_Raad = {} 
 
 def main():
     print("running")
@@ -15,34 +16,31 @@ def main():
     megaprereq = []
     classes = []
     links = soup.select('a[href^="/courses/"]')
-    links = links[3:152]
+    links = links[3:5] #153
 
     for link in links:
         #accesses class catalogs for each program
         subUrl = link.attrs['href']
         subObj = BeautifulSoup(urlopen("https://catalog.unc.edu" + subUrl), 'html.parser')
-        #program = link.get_text()[0: len(link.get_text()) - 7]
-        #abbr = getAbbr(link.get_text())
-        #link = (getLink(subObj, subUrl).get('href'))
+
         program_classes = getClasses(subObj)
         for course in program_classes:
-            classes.append(course)
-    yeah = getPrereq(BeautifulSoup(urlopen("https://catalog.unc.edu/courses/aero/"), features="html.parser"))
-    print(yeah)
-    #megaprereq.append(prereqs)
-    #print(classes[:15])
-    #print(prereqs) #MAKE .JOIN LIST OF PREREQ LISTS
-    #for course in megaclass:
-       # prereqs = getPrereq(course)
-       # geneds = getGens(course)
-       # megaprereq.append(', '.join(prereqs))
-       # megagens.append(', '.join(geneds))
+            megaclass.append(course)
 
-    #     subObj = BeautifulSoup(urlopen("https://catalog.unc.edu" + subUrl), 'html.parser')
-    #     link = getLink(subObj, subUrl)
-    #     megalist.append(link.get('href'))
+        prereqs = getPrereq(subObj)
+        for prereq in prereqs:
+            megaprereq.append(prereq)
+            if(prereq == [""]):
+                index = megaprereq.index(prereq)
+                megaprereq.remove(megaprereq[index])
+                megaclass.remove(megaclass[index])
+
+    multiassign(dictionary_for_Raad, megaclass, megaprereq)
+    print(dictionary_for_Raad)
+
     
-
+def multiassign(d, keys, values):
+    dictionary_for_Raad.update(zip(keys, values))
 
 def getLink(subObj):
     link_list = []
@@ -95,18 +93,6 @@ def getPrereq(subObj):
             prereq_list.append(prereq)
         
         prereq_list_big.append(prereq_list)
-        #     if (len(prereq_list) == 0):
-        #         print("none")
-        #         prereq_list_big.append("N/A")
-        
-    #     else:
-    #         print("adding prereqs to list")
-    #         for prereq in prereq_list:
-    #             prereq = prereq.get_text()
-    #             prereq = prereq.replace("\xa0", "")
-    #             prereq = prereq.replace(".", ". ")
-    #             final_prereqs.append(prereq)
-    #         prereq_list_big.append(prereq)
     return prereq_list_big
 
 if __name__ == "__main__":
