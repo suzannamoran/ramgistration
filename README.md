@@ -197,16 +197,16 @@ End Sub
 ```
 
 ## 3. Website Design
-Wireframed and developped a protype website in Adobe XD for a final submission.
+Wireframed and developed a protype website in Adobe XD for a final submission.
 
 https://xd.adobe.com/view/9c9732e9-0f59-4be7-8945-85cb2d86df11-c9c4/
 
 ## 4. Created a Dictionary of Prerequisites for Each Course
-Using the BeautifulSoup library, scraped data from the UNC course catalog about recquired prerequisites for each course, then transferred that data to a dictionary.
+Using the BeautifulSoup library, scraped data from the UNC course catalog about required prerequisites for each course, then transferred that data to a dictionary.
 
 ## 5. Created a Final Schedule
 The data from the two dictionaries was combined with the data from the csv in order to produce a possible schedule.
 
 ## 6. Future Add-Ons
 * We had originally planned on using API's in order to retrieve RateMyProfessor scores for each professor. Then, the code that creates schedules can be updated to show preference for professors with high ratings. These ratings would also be displayed on the final site.
-* Another API use would be scholarship searching. After a student enters in their major and minor(s), they can navigate to a list of current scholarships that are applicable to theri field. They can choose to sort this by prize or due date.
+* Another API use would be scholarship searching. After a student enters in their major and minor(s), they can navigate to a list of current scholarships that are applicable to their field. They can choose to sort this by prize or due date.
