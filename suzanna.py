@@ -1,7 +1,6 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import requests
-import re
 
 url = 'https://catalog.unc.edu/courses/'
 data = requests.get(url)
@@ -14,7 +13,6 @@ def main():
     megaclass = []
     program_classes = []
     megaprereq = []
-    classes = []
     links = soup.select('a[href^="/courses/"]')
     links = links[3:153] #153
 
